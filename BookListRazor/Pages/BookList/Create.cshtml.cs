@@ -32,6 +32,9 @@ namespace BookListRazor.Pages.BookList
 
         public async Task<IActionResult> OnPost()
         {
+            /*Checks if the book name field is valid. It is checked on serverside, 
+             however, in Create.cshtml, there is a reference to _ValidationScriptsPartial.cshtml
+            which checks modelstate on client side*/
             if(ModelState.IsValid)
             {
                 await _db.Book.AddAsync(Book);
