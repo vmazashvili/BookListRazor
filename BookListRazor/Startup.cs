@@ -27,7 +27,10 @@ namespace BookListRazor
         {
             //ADDED THIS FIRST LINE FOR MIGRATION AND DATABASE in a pipeline
             services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //Added Razor Pages 
             services.AddRazorPages().AddRazorRuntimeCompilation();
+            //Add support for the controllers for API calls (we also need to add this as a middleware in endpoints, which are below in this file)
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +56,8 @@ namespace BookListRazor
 
             app.UseEndpoints(endpoints =>
             {
+                //added for API. This calls controller APIs 
+                endpoints.MapControllers();
                 endpoints.MapRazorPages();
             });
         }

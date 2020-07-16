@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
 using System.Linq;
 using System.Threading.Tasks;
 using BookListRazor.Model;
@@ -14,7 +13,6 @@ namespace BookListRazor.Pages.BookList
     {
         private readonly ApplicationDbContext _db;
 
-        //iniciate constructor using dependency injection
         public IndexModel(ApplicationDbContext db)
         {
             _db = db;
@@ -22,7 +20,7 @@ namespace BookListRazor.Pages.BookList
 
         public IEnumerable<Book> Books { get; set; }
 
-        public async Task OnGet() //<-- handler
+        public async Task OnGet()
         {
             Books = await _db.Book.ToListAsync();
         }
@@ -30,11 +28,10 @@ namespace BookListRazor.Pages.BookList
         public async Task<IActionResult> OnPostDelete(int id)
         {
             var book = await _db.Book.FindAsync(id);
-            if(book == null)
+            if (book == null)
             {
                 return NotFound();
             }
-
             _db.Book.Remove(book);
             await _db.SaveChangesAsync();
 

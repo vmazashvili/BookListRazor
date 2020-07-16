@@ -47,7 +47,7 @@
                                 @Html.DisplayFor(m => item.ISBN)
                             </td>
                             <td>
-                                <button asp-page-handler="Delete" asp-route-id="@item.Id" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger btn-sm text-white">Delete</button>
+                                <button asp-page-handler="Delete" asp-route-id="@item.Id" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger btn-sm">Delete</button>
                                 @*asp-page helper to go to Edit page and asp-route-id to pass Id as a parameter*@
                                 <a asp-page="Edit" asp-route-id="@item.Id" class="btn btn-success btn-sm text-white">Edit</a>
                             </td>
@@ -61,5 +61,30 @@
             }
         </from>
     </div>
+
+
+    <div class="col-12" style="text-align:center">
+        <br />
+        <span class="h3 text-info">OR</span>
+        <br /><br />
+    </div>
+    <div class="col-12 border p-3">
+        <!--this table will be loaded by javascript from line 86-->
+        <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th> Author</th>
+                    <th> ISBN</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
 </div>
+<!--this script file is located in wwwroot/js-->
+@section Scripts{
+    <script src="~/js/bookList.js"></script>
+}
+
 
